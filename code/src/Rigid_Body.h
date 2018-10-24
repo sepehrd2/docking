@@ -16,5 +16,7 @@ private:
 };
 
 #endif 
-void translation (std::vector<Atom>  &, const Vector &);
-void rotation    (std::vector<Atom>  &, Quaternion &);
+void translation  (std::vector<Atom>  &, const Vector &);
+void rotation     (std::vector<Atom>  &, Quaternion &);
+Vector center_mass(std::vector<Atom>  &);
+void rotation_CM  (std::vector<Atom> & , Quaternion & q);

@@ -6,7 +6,13 @@ public:
 	float x, y, z;
 	Vector();
 	~Vector();
+	Vector& operator-(const Vector & );
+	Vector& operator=(const Vector & );
+	Vector& operator-=(const Vector & );
+	Vector& operator+(const Vector & );
+	Vector& operator+=(const Vector & );
 
+	void out();
 private:
 };
 

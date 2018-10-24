@@ -16,7 +16,9 @@ private:
 
 };
 
-Pdb read_pdb(std::string& );
-void read_XYZ(std::string&, std::vector<Atom> &);
-void write_XYZ(std::string&, std::vector<Atom> &);
+void  read_pdb(std::string&, std::vector<Atom> &); 
+void  read_XYZ(std::string&, std::vector<Atom> &);
+void write_XYZ(std::string&, std::vector<Atom> &, int);
+void write_pdb(std::string&, std::vector<Atom> &);
+
 #endif

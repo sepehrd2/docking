@@ -2,10 +2,10 @@
 SRCDIR = /Scr/sepehr/docking/code/src
 OBJS = \
 	$(SRCDIR)/main.o \
+	$(SRCDIR)/Vector.o \
 	$(SRCDIR)/pdb.o \
 	$(SRCDIR)/Atom.o \
 	$(SRCDIR)/Matrix.o \
-	$(SRCDIR)/Vector.o \
 	$(SRCDIR)/Quaternion.o \
 	$(SRCDIR)/Rigid_Body.o \
 
@@ -14,6 +14,9 @@ output: $(OBJS)
 
 main.o: main.cpp 
 	g++ -c main.cpp
+
+Vector.o: Vector.cpp Vector.h
+	g++ -c Vector.cpp
 
 pdb.o: pdb.cpp pdb.h
 	g++ -c pdb.cpp
@@ -24,8 +27,6 @@ Atom.o: Atom.cpp Atom.h
 Matrix.o: Matrix.cpp Matrix.h
 	g++ -c Matrix.cpp
 
-Vector.o: Vector.cpp Vector.h
-	g++ -c Vector.cpp
 
 Quaternion.o: Quaternion.cpp Quaternion.h
 	g++ -c Quaternion.cpp

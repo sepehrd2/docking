@@ -1,10 +1,11 @@
 //============================================================================
-// Name        : Hacketon.cpp
+// Name        : main.cpp
 // Author      : Sepehr
 #include <iostream>
 #include <fstream>
 #include <string>
 #include "pdb.h"
+#include <stdlib.h>     /* strtof */
 #include <vector>
 #include "Atom.h"
 #include "Vector.h"
@@ -12,16 +13,18 @@
 #include "Matrix.h"
 #include "Quaternion.h"
 #include "Constants.h"
-// inline bool starts_with(const std::string& str, const std::string& start) {
-// 	return str.size() >= start.size() && str.substr(0, start.size()) == start;
-// }
+#include <string>     // std::string, std::to_string
+#include <sstream>
+#include <iomanip> // setprecision
+
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
-  
+using namespace boost;
 int main() {
   ifstream myfile;
 	string d;
-	string a = "/Scr/sepehr/docking/protein.XYZ";
+	string a = "/Scr/sepehr/docking/protein.pdb";
   string b = "/Scr/sepehr/docking/protein_new.XYZ";
   Vector T;
   T.x = 1.0;
@@ -33,14 +36,62 @@ int main() {
   // q.x2 = 0;
   // q.x3 = 0;
   // q.x4 = 0;
-  q.ang_vec_to_q(60.0 * deg_to_rad, T);
-  q.out();
+  
+  ofstream XYZfile;
+  XYZfile.open (b.c_str());
+
   vector<Atom>  ATOMS;
-	read_XYZ (a, ATOMS);
-  // translation (ATOMS, T);
-  rotation(ATOMS, q);
-  write_XYZ(b, ATOMS);
-  // Matrix m;
+  read_pdb (a, ATOMS);
+  // translation(ATOMS, T);
+  for (int i = 0; i < 600; ++i)
+  {
+    q.ang_vec_to_q(4 * deg_to_rad, T);
+    rotation_CM(ATOMS, q);
+    XYZfile << ATOMS.size() << endl;
+    XYZfile << i  << endl;
+    for (int j = 0; j < ATOMS.size(); ++j)
+    {
+      XYZfile << ATOMS[j].name     << " ";
+      XYZfile << ATOMS[j].position.x << " ";
+      XYZfile << ATOMS[j].position.y << " ";
+      XYZfile << ATOMS[j].position.z << endl; 
+    } 
+  }
+  XYZfile.close();
+  float cc;
+  char* pEnd;
+  Vector TT, TTT;
+  TT.x = 1.0;
+  TT.y = 3.0;
+  TT.z = 3.0;
+  T -= TT;
+  T.out();
+  TT.out();
+  TTT.out();
+  // cc = strtof("123", NULL);
+//   string st;
+//   st = "123";
+//   cc = atof(st.c_str());
+//   cout << cc * 2 << endl;
+//   string str(" 123 ");
+//   // trim(str);
+//   // cout << str;
+// int pi = 123;
+// stringstream stream;
+// stream << fixed << setprecision(3) << pi;
+// string s = stream.str();
+// while (s.length() < 4)
+// {
+//   s  = s + " ";
+// }
+// cout << s;
+  // string.erase(std::remove_if(string.begin(), string.end(), std::isspace), string.end());
+ //  q.out();
+	// read_XYZ (a, ATOMS);
+ //  // translation (ATOMS, T);
+ //  rotation(ATOMS, q);
+ //  write_XYZ(b, ATOMS);
+ //  // Matrix m;
   // Matrix m_inv;
   // Matrix n;
   // m.a11 = 1;
