@@ -8,6 +8,8 @@ OBJS = \
 	$(SRCDIR)/Matrix.o \
 	$(SRCDIR)/Quaternion.o \
 	$(SRCDIR)/Rigid_Body.o \
+	$(SRCDIR)/Random.o \
+	$(SRCDIR)/Monte_Carlo.o \
 
 output: $(OBJS)
 	g++ $(OBJS) -o output
@@ -33,6 +35,12 @@ Quaternion.o: Quaternion.cpp Quaternion.h
 
 Rigid_Body.o: Rigid_Body.cpp Rigid_Body.h
 	g++ -c Rigid_Body.cpp
+
+Random.o: Random.cpp Random.h
+	g++ -c Random.cpp
+
+Monte_Carlo.o: Monte_Carlo.cpp Monte_Carlo.h
+	g++ -c Monte_Carlo.cpp
 
 clean:
 	rm -f *.o output
