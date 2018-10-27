@@ -13,6 +13,7 @@
 #include "Matrix.h"
 #include "Quaternion.h"
 #include "Constants.h"
+#include "Random.h"
 #include <string>     // std::string, std::to_string
 #include <sstream>
 #include <iomanip> // setprecision
@@ -24,12 +25,10 @@ using namespace boost;
 int main() {
   ifstream myfile;
 	string d;
-	string a = "/Scr/sepehr/docking/protein.pdb";
-  string b = "/Scr/sepehr/docking/protein_new.XYZ";
+	string a = "/Scr/sepehr/docking/ligand.pdb";
+  string b = "/Scr/sepehr/docking/ligand_new.XYZ";
   Vector T;
-  T.x = 1.0;
-  T.y = 0.0;
-  T.z = 0.0;
+  
 
   Quaternion q, p, l;
   // q.x1 = 1;
@@ -39,13 +38,19 @@ int main() {
   
   ofstream XYZfile;
   XYZfile.open (b.c_str());
-
+  double rand_rot_angle;
   vector<Atom>  ATOMS;
   read_pdb (a, ATOMS);
-  // translation(ATOMS, T);
+  // 
   for (int i = 0; i < 600; ++i)
   {
-    q.ang_vec_to_q(4 * deg_to_rad, T);
+    // cout << i << endl;
+    rand_rot_angle = gaussian() * 1.0;
+    T.x = gaussian();
+    T.y = gaussian();
+    T.z = gaussian();
+    // translation(ATOMS, T);
+    q.ang_vec_to_q(rand_rot_angle * deg_to_rad, T);
     rotation_CM(ATOMS, q);
     XYZfile << ATOMS.size() << endl;
     XYZfile << i  << endl;

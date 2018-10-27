@@ -6,16 +6,17 @@
 
 double uniform()
 {
-	srand (time(NULL));
-	return (rand()/RAND_MAX);
+	srand (time(NULL) + rand());
+	return (rand()/(RAND_MAX + 1.0));
 }
 double gaussian()
 {
 	double v1, v2, R;
-	v1 = 2 * uniform() - 1.0;
-	v2 = 2 * uniform() - 1.0;
+
 	do
 	{
+		v1 = 2.0 * uniform() - 1.0;
+		v2 = 2.0 * uniform() - 1.0;
 		R = v1 * v1 + v2 * v2;
 	} while (R > 1.0 || R < 1.523e-8);
 	return (v1 * sqrt(-2.0 * log(R) / R));
