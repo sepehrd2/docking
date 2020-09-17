@@ -14,5 +14,5 @@ forcefield parameters for different non-bonded interactions.
 At the moment, the code is not capable of working with flexible
 ligands or/and proteins. Moreover, the implementation at this stage
 is serial. The code is not capable of any visualization and users
-need to rely on another softwares, e.g. VMD, to visualize the poses
+need to rely on another softwares, e.g. VMD, to visualize the docked poses
 and protein. 
